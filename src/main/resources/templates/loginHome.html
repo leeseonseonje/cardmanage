@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>card</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div class="jumbotron">
+        <h1>BUSINESS CARD</h1>
+        <p class="lead">회원 기능</p>
+        <p>
+            <a class="btn btn-lg btn-secondary" href="/logout">로그아웃</a>
+        </p>
+        <p class="lead">명함 기능</p>
+        <p>
+            <a class="btn btn-lg btn-primary" href="javascript:card();">명함 등록</a>
+            <a class="btn btn-lg btn-primary" href="javascript:cards();">명함 목록</a>
+        </p>
+    </div>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+<script>
+    function card() {
+        location.href = document.location.href + "/card";
+    }
+
+    function cards() {
+        location.href = document.location.href + "/cards";
+    }
+</script>
+</html>

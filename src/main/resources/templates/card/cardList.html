@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<style>
+    .table-striped{table-layout:fixed}
+    .name {
+        text-overflow:ellipsis;
+        overflow:hidden;
+        white-space:nowrap; }
+    .company {
+        text-overflow:ellipsis;
+        overflow:hidden;
+        white-space:nowrap; }
+    .email {
+        text-overflow:ellipsis;
+        overflow:hidden;
+        white-space:nowrap; }
+</style>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>이름</th>
+                <th>회사이름</th>
+                <th>이메일</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="card : ${cards}">
+                <td class="name" th:text="${card.name}"></td>
+                <td class="company" th:text="${card.companyName}"></td>
+                <td class="email" th:text="${card.email}"></td>
+                <td style="width: 1000px">
+                    <a href="#" th:href="@{card/{id} (id=${card.id})}"
+                       class="btn btn-primary" role="button">상세</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>
