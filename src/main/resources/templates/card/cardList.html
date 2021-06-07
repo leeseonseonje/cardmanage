@@ -15,6 +15,9 @@
         text-overflow:ellipsis;
         overflow:hidden;
         white-space:nowrap; }
+    .btn-primary {
+        font-size: medium;
+    }
 </style>
 <body>
 <div class="container">
@@ -26,12 +29,12 @@
                 <th>이름</th>
                 <th>회사이름</th>
                 <th>이메일</th>
-                <th></th>
+                <th><a class="btn btn-lg btn-primary" href="javascript:back();">이전</a></th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="card : ${cards}">
-                <td class="name" th:text="${card.id}"></td>
+                <td class="name" th:text="${card.name}"></td>
                 <td class="company" th:text="${card.companyName}"></td>
                 <td class="email" th:text="${card.email}"></td>
                 <td>
@@ -56,4 +59,9 @@
     <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->
 </body>
+<script>
+    function back() {
+        window.history.back();
+    }
+</script>
 </html>
