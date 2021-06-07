@@ -31,16 +31,27 @@
             </thead>
             <tbody>
             <tr th:each="card : ${cards}">
-                <td class="name" th:text="${card.name}"></td>
+                <td class="name" th:text="${card.id}"></td>
                 <td class="company" th:text="${card.companyName}"></td>
                 <td class="email" th:text="${card.email}"></td>
-                <td style="width: 1000px">
+                <td>
                     <a href="#" th:href="@{card/{id} (id=${card.id})}"
                        class="btn btn-primary" role="button">상세</a>
                 </td>
             </tr>
             </tbody>
         </table>
+        <nav aria-label="Page navigation example ">
+            <ul class="pagination">
+                <th:block  th:with="start = 1, end = ${totalPages}">
+                    <li class="page-item"
+                        th:with="start = 1, end = ${totalPages}"
+                        th:each="pageButton : ${#numbers.sequence(start, end)}">
+                        <a class="page-link" th:text=${pageButton} th:href="@{?page={page} (page=${pageButton})}"></a>
+                    </li>
+                </th:block>
+            </ul>
+        </nav>
     </div>
     <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->

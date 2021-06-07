@@ -7,6 +7,8 @@ import cardmanage.cardmanage.dto.CardDto;
 import cardmanage.cardmanage.reposity.CardRepository;
 import cardmanage.cardmanage.reposity.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,8 +41,8 @@ public class CardService {
     }
 
     //카드 조회
-    public List<Card> findCards(Long memberId){
-        return cardRepository.findCards(memberId);
+    public Page<Card> findCards(Long memberId, int page){
+       return cardRepository.findCards(memberId, PageRequest.of(page, 10));
     }
 
     public Card findCard(Long cardId) {

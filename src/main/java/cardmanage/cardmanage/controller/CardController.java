@@ -4,6 +4,7 @@ import cardmanage.cardmanage.Service.CardService;
 import cardmanage.cardmanage.domain.Card;
 import cardmanage.cardmanage.dto.CardDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,14 +32,14 @@ public class CardController {
         }
 
         cardService.save(memberId, cardDto);
-        return "redirect:/" + memberId + "/cards";
+        return "redirect:/" + memberId + "/cards?page=1";
     }
 
     @GetMapping("/{memberId}/cards")
-    public String cards(@PathVariable Long memberId, Model model) {
-        List<Card> cards = cardService.findCards(memberId);
-        model.addAttribute("cards", cards);
-
+    public String cards(@PathVariable Long memberId, Model model, @RequestParam("page") int page) {
+        Page<Card> cardPage = cardService.findCards(memberId, page-1);
+        model.addAttribute("cards", cardPage.getContent());
+        model.addAttribute("totalPages", (cardPage.getTotalPages()));
         return "card/cardList";
     }
 
@@ -48,14 +49,6 @@ public class CardController {
         model.addAttribute("card", card);
 
         return "card/cardView";
-    }
-
-    @GetMapping("/{memberId}/card/{cardId}/back")
-    public String backButton(@PathVariable Long memberId, @PathVariable Long cardId, Model model) {
-        Card card = cardService.findCard(cardId);
-        model.addAttribute("card", card);
-
-        return "redirect:/" + memberId + "/cards";
     }
 
     @GetMapping("/{memberId}/card-update/{cardId}")
@@ -73,13 +66,13 @@ public class CardController {
 
         cardService.updateCard(cardId, cardDto);
 
-        return "redirect:/" + memberId + "/cards";
+        return "redirect:/" + memberId + "/cards?page=1";
     }
 
     @GetMapping("/{memberId}/card-delete/{cardId}")
     public String deleteCard(@PathVariable Long memberId, @PathVariable Long cardId) {
         cardService.deleteCard(cardId);
 
-        return "redirect:/" + memberId + "/cards";
+        return "redirect:/" + memberId + "/cards?page=1";
     }
 }

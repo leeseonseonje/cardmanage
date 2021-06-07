@@ -47,8 +47,13 @@
     </fieldset>
     <a class="btn btn-lg btn-primary" th:href="@{/{memberId}/card-update/{cardId} (cardId=${card.id}, memberId=${card.member.id})}">수정</a>
     <a class="btn btn-lg btn-primary" th:href="@{/{memberId}/card-delete/{cardId} (cardId=${card.id}, memberId=${card.member.id})}">삭제</a>
-    <a class="btn btn-lg btn-primary"th:href="@{/{memberId}/cards (memberId=${card.member.id})}">이전으로</a>
+    <a class="btn btn-lg btn-primary" href="javascript:back();">이전으로</a>
     <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->
 </body>
+<script>
+    function back() {
+        window.history.back();
+    }
+</script>
 </html>
