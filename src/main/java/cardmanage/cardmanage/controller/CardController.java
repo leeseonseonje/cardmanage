@@ -18,12 +18,14 @@ public class CardController {
 
     private final CardService cardService;
 
+    //명함 등록 화면
     @GetMapping("/{memberId}/card")
     public String cardForm(@PathVariable Long memberId, Model model) {
         model.addAttribute("cardDto", new CardDto());
         return "card/createCardForm";
     }
 
+    //명함 정보 DB에 등록
     @PostMapping("/{memberId}/card")
     public String card(@PathVariable Long memberId, @Valid CardDto cardDto, BindingResult result) {
         if (result.hasErrors()) {
@@ -34,6 +36,7 @@ public class CardController {
         return "redirect:/" + memberId + "/cards?page=1";
     }
 
+    //등록한 명함 목록
     @GetMapping("/{memberId}/cards")
     public String cards(@PathVariable Long memberId, Model model, @RequestParam("page") int page) {
         Page<Card> cardPage = cardService.findCards(memberId, page-1);
@@ -46,6 +49,7 @@ public class CardController {
         return "card/cardList";
     }
 
+    //명함 상세 보기
     @GetMapping("/{memberId}/card/{cardId}")
     public String cardView(@PathVariable Long memberId, @PathVariable Long cardId, Model model) {
         Card card = cardService.findCard(cardId);
@@ -54,12 +58,14 @@ public class CardController {
         return "card/cardView";
     }
 
+    //명함 수정 화면
     @GetMapping("/{memberId}/card/{cardId}/edit")
     public String updateCardForm(@PathVariable Long memberId, @PathVariable Long cardId, Model model) {
         model.addAttribute("cardDto", new CardDto());
         return "card/updateCardForm";
     }
 
+    //명함 수정 DB
     @PostMapping("/{memberId}/card/{cardId}/edit")
     public String updateCard(@PathVariable Long memberId, @PathVariable Long cardId,
                              @Valid CardDto cardDto, BindingResult result) {
@@ -72,6 +78,7 @@ public class CardController {
         return "redirect:/" + memberId + "/cards?page=1";
     }
 
+    //명함 삭제(DB)
     @GetMapping("/{memberId}/card/{cardId}/delete")
     public String deleteCard(@PathVariable Long memberId, @PathVariable Long cardId) {
         cardService.deleteCard(cardId);
