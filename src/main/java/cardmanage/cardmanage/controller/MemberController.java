@@ -45,9 +45,9 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid LoginDto loginDto, BindingResult result, Model model) {
+    public String login(@Valid LoginDto loginDto, BindingResult result) {
         if (result.hasErrors()) {
-            return "member/createMemberForm";
+            return "member/loginMemberForm";
         }
 
         if (memberService.login(loginDto)) {

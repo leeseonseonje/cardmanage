@@ -7,8 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -29,12 +27,14 @@ public class MemberService {
     }
 
     public Boolean login(LoginDto loginDto) {
-        Member findMember = memberRepository.findByUserId(loginDto.getUserId());
+        Member findMember = memberRepository.findByUserId(loginDto.getUserId()).orElseThrow(
+                () -> new RuntimeException("존재하지 않는 회원입니다."));
         return findMember.getPassword().equals(loginDto.getPassword());
     }
 
     public Long findMemberId(LoginDto loginDto) {
-        Member findMember = memberRepository.findByUserId(loginDto.getUserId());
+        Member findMember = memberRepository.findByUserId(loginDto.getUserId()).orElseThrow(
+                () -> new RuntimeException("존재하지 않는 회원입니다."));;
         return findMember.getId();
     }
 }

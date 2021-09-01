@@ -1,13 +1,13 @@
 spring:
   datasource:
-    url: jdbc:mariadb://seon.ct7pf7zk47p2.ap-northeast-2.rds.amazonaws.com:3306/card
-    username: leeseonje
-    password: 123456789
-    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:h2:tcp://localhost/~/jpashop
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         show_sql: true

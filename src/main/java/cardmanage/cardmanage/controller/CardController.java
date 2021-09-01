@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -38,6 +37,10 @@ public class CardController {
     @GetMapping("/{memberId}/cards")
     public String cards(@PathVariable Long memberId, Model model, @RequestParam("page") int page) {
         Page<Card> cardPage = cardService.findCards(memberId, page-1);
+
+        if (cardPage.getContent().isEmpty()) {
+            return "redirect:/" + memberId;
+        }
         model.addAttribute("cards", cardPage.getContent());
         model.addAttribute("totalPages", (cardPage.getTotalPages()));
         return "card/cardList";
@@ -51,13 +54,13 @@ public class CardController {
         return "card/cardView";
     }
 
-    @GetMapping("/{memberId}/card-update/{cardId}")
+    @GetMapping("/{memberId}/card/{cardId}/edit")
     public String updateCardForm(@PathVariable Long memberId, @PathVariable Long cardId, Model model) {
         model.addAttribute("cardDto", new CardDto());
         return "card/updateCardForm";
     }
 
-    @PostMapping("/{memberId}/card-update/{cardId}")
+    @PostMapping("/{memberId}/card/{cardId}/edit")
     public String updateCard(@PathVariable Long memberId, @PathVariable Long cardId,
                              @Valid CardDto cardDto, BindingResult result) {
         if (result.hasErrors()) {
@@ -69,7 +72,7 @@ public class CardController {
         return "redirect:/" + memberId + "/cards?page=1";
     }
 
-    @GetMapping("/{memberId}/card-delete/{cardId}")
+    @GetMapping("/{memberId}/card/{cardId}/delete")
     public String deleteCard(@PathVariable Long memberId, @PathVariable Long cardId) {
         cardService.deleteCard(cardId);
 

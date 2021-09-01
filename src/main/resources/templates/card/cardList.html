@@ -29,7 +29,8 @@
                 <th>이름</th>
                 <th>회사이름</th>
                 <th>이메일</th>
-                <th><a class="btn btn-lg btn-primary" href="javascript:back();">이전</a></th>
+                <th><a class="btn btn-lg btn-primary" th:if="${!cards.isEmpty()}"
+                       th:href="@{/{memberId} (memberId=${cards.get(0).member.id})}">이전</a></th>
             </tr>
             </thead>
             <tbody>
@@ -46,7 +47,7 @@
         </table>
         <nav aria-label="Page navigation example ">
             <ul class="pagination">
-                <th:block  th:with="start = 1, end = ${totalPages}">
+                <th:block th:with="start = 1, end = ${totalPages}" th:if="${totalPages != 0}">
                     <li class="page-item"
                         th:with="start = 1, end = ${totalPages}"
                         th:each="pageButton : ${#numbers.sequence(start, end)}">
@@ -60,8 +61,5 @@
 </div> <!-- /container -->
 </body>
 <script>
-    function back() {
-        window.history.back();
-    }
 </script>
 </html>
