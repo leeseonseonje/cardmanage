@@ -1,8 +1,8 @@
-package cardmanage.cardmanage.Service;
+package cardmanage.cardmanage.service;
 
 import cardmanage.cardmanage.domain.Member;
 import cardmanage.cardmanage.dto.LoginDto;
-import cardmanage.cardmanage.reposity.MemberRepository;
+import cardmanage.cardmanage.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

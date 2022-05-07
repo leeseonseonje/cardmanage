@@ -1,6 +1,6 @@
 package cardmanage.cardmanage.controller;
 
-import cardmanage.cardmanage.Service.MemberService;
+import cardmanage.cardmanage.service.MemberService;
 import cardmanage.cardmanage.domain.Member;
 import cardmanage.cardmanage.dto.LoginDto;
 import cardmanage.cardmanage.dto.MemberDto;

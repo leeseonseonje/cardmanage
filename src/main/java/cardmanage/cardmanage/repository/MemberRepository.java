@@ -1,4 +1,4 @@
-package cardmanage.cardmanage.reposity;
+package cardmanage.cardmanage.repository;
 
 import cardmanage.cardmanage.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;

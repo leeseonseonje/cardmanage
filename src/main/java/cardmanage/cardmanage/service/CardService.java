@@ -1,18 +1,16 @@
-package cardmanage.cardmanage.Service;
+package cardmanage.cardmanage.service;
 
 
 import cardmanage.cardmanage.domain.Card;
 import cardmanage.cardmanage.domain.Member;
 import cardmanage.cardmanage.dto.CardDto;
-import cardmanage.cardmanage.reposity.CardRepository;
-import cardmanage.cardmanage.reposity.MemberRepository;
+import cardmanage.cardmanage.repository.CardRepository;
+import cardmanage.cardmanage.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

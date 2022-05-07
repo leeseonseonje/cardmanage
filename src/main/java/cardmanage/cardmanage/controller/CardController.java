@@ -1,6 +1,6 @@
 package cardmanage.cardmanage.controller;
 
-import cardmanage.cardmanage.Service.CardService;
+import cardmanage.cardmanage.service.CardService;
 import cardmanage.cardmanage.domain.Card;
 import cardmanage.cardmanage.dto.CardDto;
 import lombok.RequiredArgsConstructor;
